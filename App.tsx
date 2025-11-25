@@ -79,7 +79,7 @@ const App: React.FC = () => {
 
             <button 
               onClick={() => setShowAIGenerator(true)}
-              className="w-full sm:w-auto px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-lg font-medium shadow-lg shadow-purple-900/20 transition-all flex items-center justify-center gap-2 group"
+              className="hidden w-full sm:w-auto px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-lg font-medium shadow-lg shadow-purple-900/20 transition-all flex items-center justify-center gap-2 group"
             >
               <Wand2 className="w-4 h-4 group-hover:rotate-12 transition-transform" />
               <span>AI Design</span>

@@ -46,6 +46,22 @@ const createBar = (id: string, name: string, css: string, count: number = 5): Lo
   };
 };
 
+const createGrid = (id: string, name: string, css: string, html: string): LoaderItem => ({
+  id,
+  name,
+  type: 'grid',
+  html: buildLoaderHtml(html, id),
+  css: scopeLoaderCss(css, id)
+});
+
+const createPulse = (id: string, name: string, css: string, html: string = '<div class="loader"></div>'): LoaderItem => ({
+  id,
+  name,
+  type: 'pulse',
+  html: buildLoaderHtml(html, id),
+  css: scopeLoaderCss(css, id)
+});
+
 export const initialLoaders: LoaderItem[] = [
   // --- SPINNERS (25) ---
   {
@@ -711,44 +727,27 @@ export const initialLoaders: LoaderItem[] = [
 .loader-grid-cube div:nth-child(9) { animation-delay: 0.2s; }
 @keyframes grid-fade { 0%, 70%, 100% { opacity: 1; transform: scale(1); } 35% { opacity: 0; transform: scale(0.5); } }`
   },
-  createSpinner('grid-shuffle', 'Grid Shuffle', `
+  createGrid('grid-shuffle', 'Grid Shuffle', `
 .loader { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; width: var(--loader-size); height: var(--loader-size); }
 .loader div { background: var(--loader-color); animation: shuffle-grid var(--loader-speed) infinite ease-in-out; }
 .loader div:nth-child(1) { animation-delay: 0s; }
 .loader div:nth-child(2) { animation-delay: 0.2s; }
 .loader div:nth-child(3) { animation-delay: 0.4s; }
 .loader div:nth-child(4) { animation-delay: 0.6s; }
-@keyframes shuffle-grid { 0% { transform: scale(1); } 50% { transform: scale(0.5) rotate(90deg); } 100% { transform: scale(1) rotate(180deg); } }`, '<div><div></div><div></div><div></div><div></div></div>'),
-  createSpinner('grid-scale', 'Grid Scale', `
+@keyframes shuffle-grid { 0% { transform: scale(1); } 50% { transform: scale(0.5) rotate(90deg); } 100% { transform: scale(1) rotate(180deg); } }`, `<div>${'<div></div>'.repeat(4)}</div>`),
+  createGrid('grid-scale', 'Grid Scale', `
 .loader { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; width: var(--loader-size); height: var(--loader-size); }
 .loader div { background: var(--loader-color); animation: scale-grid var(--loader-speed) infinite ease-in-out; }
-@keyframes scale-grid { 0%, 100% { transform: scale(1); } 50% { transform: scale(0.5); } }`, '<div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'),
-  createSpinner('grid-pulse', 'Grid Pulse', `
-.loader { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; width: var(--loader-size); height: var(--loader-size); }
-.loader div { background: var(--loader-color); border-radius: 50%; animation: pulse-grid var(--loader-speed) infinite ease-in-out; }
-.loader div:nth-child(5) { animation-delay: 0s; }
-.loader div:nth-child(2), .loader div:nth-child(4), .loader div:nth-child(6), .loader div:nth-child(8) { animation-delay: 0.2s; }
-.loader div:nth-child(1), .loader div:nth-child(3), .loader div:nth-child(7), .loader div:nth-child(9) { animation-delay: 0.4s; }
-@keyframes pulse-grid { 0%, 100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1); } }`, '<div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'),
-  createSpinner('grid-rotate', 'Grid Rotate', `
+@keyframes scale-grid { 0%, 100% { transform: scale(1); } 50% { transform: scale(0.5); } }`, `<div>${'<div></div>'.repeat(9)}</div>`),
+  createGrid('grid-rotate', 'Grid Rotate', `
 .loader { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; width: var(--loader-size); height: var(--loader-size); animation: rotate-grid var(--loader-speed) infinite steps(4); }
 .loader div { background: var(--loader-color); }
 .loader div:nth-child(1) { opacity: 0.4; }
 .loader div:nth-child(2) { opacity: 0.6; }
 .loader div:nth-child(3) { opacity: 0.8; }
 .loader div:nth-child(4) { opacity: 1; }
-@keyframes rotate-grid { 100% { transform: rotate(360deg); } }`, '<div><div></div><div></div><div></div><div></div></div>'),
-  createSpinner('grid-fade-out', 'Grid Fade Out', `
-.loader { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; width: var(--loader-size); height: var(--loader-size); }
-.loader div { background: var(--loader-color); animation: fade-grid-out var(--loader-speed) infinite linear; }
-@keyframes fade-grid-out { 0% { opacity: 1; } 100% { opacity: 0; } }`, '<div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'),
-  createSpinner('grid-diamonds', 'Diamonds', `
-.loader { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; width: var(--loader-size); height: var(--loader-size); transform: rotate(45deg); }
-.loader div { background: var(--loader-color); animation: diamond-pulse var(--loader-speed) infinite alternate; }
-.loader div:nth-child(1) { animation-delay: 0s; }
-.loader div:nth-child(4) { animation-delay: 0.5s; }
-@keyframes diamond-pulse { 0% { transform: scale(0.8); } 100% { transform: scale(1.1); } }`, '<div><div></div><div></div><div></div><div></div></div>'),
-  createSpinner('grid-cross', 'Grid Cross', `
+@keyframes rotate-grid { 100% { transform: rotate(360deg); } }`, `<div>${'<div></div>'.repeat(4)}</div>`),
+  createGrid('grid-cross', 'Grid Cross', `
 .loader { width: var(--loader-size); height: var(--loader-size); position: relative; }
 .loader div { position: absolute; background: var(--loader-color); width: 30%; height: 30%; animation: cross-move var(--loader-speed) infinite ease-in-out; }
 .loader div:nth-child(1) { top: 0; left: 0; animation-name: cross-tl; }
@@ -758,21 +757,51 @@ export const initialLoaders: LoaderItem[] = [
 @keyframes cross-tl { 0%, 100% { top: 0; left: 0; } 50% { top: 70%; left: 70%; } }
 @keyframes cross-tr { 0%, 100% { top: 0; right: 0; } 50% { top: 70%; right: 70%; } }
 @keyframes cross-bl { 0%, 100% { bottom: 0; left: 0; } 50% { bottom: 70%; left: 70%; } }
-@keyframes cross-br { 0%, 100% { bottom: 0; right: 0; } 50% { bottom: 70%; right: 70%; } }`, '<div><div></div><div></div><div></div><div></div></div>'),
-  createSpinner('grid-random', 'Random Fade', `
+@keyframes cross-br { 0%, 100% { bottom: 0; right: 0; } 50% { bottom: 70%; right: 70%; } }`, `<div>${'<div></div>'.repeat(4)}</div>`),
+  createGrid('grid-random', 'Random Fade', `
 .loader { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; width: var(--loader-size); height: var(--loader-size); }
 .loader div { background: var(--loader-color); animation: random-fade var(--loader-speed) infinite linear; }
 .loader div:nth-child(1) { animation-delay: 0.1s; }
 .loader div:nth-child(5) { animation-delay: 0.5s; }
 .loader div:nth-child(9) { animation-delay: 0.9s; }
-@keyframes random-fade { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }`, '<div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'),
-  createSpinner('grid-fold', 'Folding', `
+@keyframes random-fade { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }`, `<div>${'<div></div>'.repeat(9)}</div>`),
+  createGrid('grid-fold', 'Folding', `
 .loader { width: var(--loader-size); height: var(--loader-size); position: relative; transform: rotateZ(45deg); }
 .loader div { position: absolute; transform: rotateZ(0); width: 50%; height: 50%; background: var(--loader-color); animation: fold var(--loader-speed) infinite linear; transform-origin: 100% 100%; }
 .loader div:nth-child(2) { transform: rotateZ(90deg); animation-delay: 0.3s; }
 .loader div:nth-child(3) { transform: rotateZ(180deg); animation-delay: 0.6s; }
 .loader div:nth-child(4) { transform: rotateZ(270deg); animation-delay: 0.9s; }
-@keyframes fold { 0%, 10% { transform: perspective(140px) rotateX(-180deg); opacity: 0; } 25%, 75% { transform: perspective(140px) rotateX(0deg); opacity: 1; } 90%, 100% { transform: perspective(140px) rotateY(180deg); opacity: 0; } }`, '<div><div></div><div></div><div></div><div></div></div>'),
+@keyframes fold { 0%, 10% { transform: perspective(140px) rotateX(-180deg); opacity: 0; } 25%, 75% { transform: perspective(140px) rotateX(0deg); opacity: 1; } 90%, 100% { transform: perspective(140px) rotateY(180deg); opacity: 0; } }`, `<div>${'<div></div>'.repeat(4)}</div>`),
+  createGrid('grid-wave', 'Wave Matrix', `
+.loader { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; width: var(--loader-size); height: var(--loader-size); }
+.loader div { background: var(--loader-color); border-radius: 4px; animation: grid-wave var(--loader-speed) ease-in-out infinite; }
+.loader div:nth-child(4n+1) { animation-delay: 0s; }
+.loader div:nth-child(4n+2) { animation-delay: 0.1s; }
+.loader div:nth-child(4n+3) { animation-delay: 0.2s; }
+.loader div:nth-child(4n) { animation-delay: 0.3s; }
+@keyframes grid-wave { 0%, 100% { transform: translateY(0); opacity: 0.5; } 50% { transform: translateY(-35%); opacity: 1; } }`, `<div>${'<div></div>'.repeat(16)}</div>`),
+  createGrid('grid-luminate', 'Luminate Grid', `
+.loader { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; width: var(--loader-size); height: var(--loader-size); }
+.loader div { background: var(--loader-color); opacity: 0.2; animation: grid-luminate var(--loader-speed) linear infinite; }
+.loader div:nth-child(5n+1) { animation-delay: 0s; }
+.loader div:nth-child(5n+2) { animation-delay: 0.1s; }
+.loader div:nth-child(5n+3) { animation-delay: 0.2s; }
+.loader div:nth-child(5n+4) { animation-delay: 0.3s; }
+.loader div:nth-child(5n) { animation-delay: 0.4s; }
+@keyframes grid-luminate { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }`, `<div>${'<div></div>'.repeat(25)}</div>`),
+  createGrid('grid-shift', 'Shift Blocks', `
+.loader { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; width: var(--loader-size); height: var(--loader-size); }
+.loader div { background: var(--loader-color); animation: grid-shift var(--loader-speed) ease-in-out infinite; }
+.loader div:nth-child(3n+1) { animation-delay: 0s; }
+.loader div:nth-child(3n+2) { animation-delay: 0.1s; }
+.loader div:nth-child(3n) { animation-delay: 0.2s; }
+@keyframes grid-shift { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(25%); } }`, `<div>${'<div></div>'.repeat(9)}</div>`),
+  createGrid('grid-tilt', 'Tilt Grid', `
+.loader { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; width: var(--loader-size); height: var(--loader-size); perspective: 400px; }
+.loader div { background: var(--loader-color); border-radius: 6px; animation: grid-tilt var(--loader-speed) linear infinite; transform-origin: center; }
+.loader div:nth-child(odd) { animation-delay: 0.15s; }
+.loader div:nth-child(even) { animation-delay: 0.3s; }
+@keyframes grid-tilt { 0% { transform: rotateX(0deg) rotateY(0deg); } 50% { transform: rotateX(35deg) rotateY(35deg); opacity: 0.6; } 100% { transform: rotateX(0deg) rotateY(0deg); } }`, `<div>${'<div></div>'.repeat(9)}</div>`),
 
   // --- PULSE (10) ---
   {
@@ -786,35 +815,35 @@ export const initialLoaders: LoaderItem[] = [
 .loader-heart div:before { left: -50%; } .loader-heart div:after { top: -50%; }
 @keyframes heart { 0% { transform: scale(0.95); } 5% { transform: scale(1.1); } 39% { transform: scale(0.85); } 45% { transform: scale(1); } 60% { transform: scale(0.95); } 100% { transform: scale(0.9); } }`
   },
-  createSpinner('pulse-ripple', 'Ripple', `
+  createPulse('pulse-ripple', 'Ripple', `
 .loader { width: var(--loader-size); height: var(--loader-size); position: relative; }
 .loader div { position: absolute; border: 4px solid var(--loader-color); opacity: 1; border-radius: 50%; animation: ripple var(--loader-speed) cubic-bezier(0, 0.2, 0.8, 1) infinite; }
 .loader div:nth-child(2) { animation-delay: -0.5s; }
 @keyframes ripple { 0% { top: 45%; left: 45%; width: 10%; height: 10%; opacity: 1; } 100% { top: 0px; left: 0px; width: 90%; height: 90%; opacity: 0; } }`, '<div><div></div><div></div></div>'),
-  createSpinner('pulse-ping', 'Ping', `
+  createPulse('pulse-ping', 'Ping', `
 .loader { width: var(--loader-size); height: var(--loader-size); position: relative; }
 .loader div { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: var(--loader-color); opacity: 0.6; animation: ping var(--loader-speed) infinite cubic-bezier(0, 0, 0.2, 1); }
 @keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }`, '<div><div></div></div>'),
-  createSpinner('pulse-beacon', 'Beacon', `
+  createPulse('pulse-beacon', 'Beacon', `
 .loader { width: var(--loader-size); height: var(--loader-size); background: var(--loader-color); border-radius: 50%; animation: beacon var(--loader-speed) infinite ease-in-out; }
 @keyframes beacon { 0% { transform: scale(0.8); box-shadow: 0 0 0 0 var(--loader-color); } 70% { transform: scale(1); box-shadow: 0 0 0 20px transparent; } 100% { transform: scale(0.8); } }`),
-  createSpinner('pulse-square', 'Square Pulse', `
+  createPulse('pulse-square', 'Square Pulse', `
 .loader { width: var(--loader-size); height: var(--loader-size); background: var(--loader-color); animation: square-pulse var(--loader-speed) infinite ease-in-out; }
 @keyframes square-pulse { 0% { transform: scale(0.8); opacity: 0.5; } 50% { transform: scale(1); opacity: 1; } 100% { transform: scale(0.8); opacity: 0.5; } }`),
-  createSpinner('pulse-radar-2', 'Radar Scan', `
+  createPulse('pulse-radar-2', 'Radar Scan', `
 .loader { width: var(--loader-size); height: var(--loader-size); border: 2px solid var(--loader-color); border-radius: 50%; position: relative; }
 .loader:after { content: ''; position: absolute; width: 4px; height: 50%; background: var(--loader-color); top: 50%; left: 50%; transform-origin: 0 0; animation: scan2 var(--loader-speed) linear infinite; }
 @keyframes scan2 { 100% { transform: rotate(360deg); } }`),
-  createSpinner('pulse-grow', 'Grow', `
+  createPulse('pulse-grow', 'Grow', `
 .loader { width: var(--loader-size); height: var(--loader-size); background: var(--loader-color); border-radius: 50%; animation: grow-pulse var(--loader-speed) infinite alternate; }
 @keyframes grow-pulse { from { transform: scale(0.5); } to { transform: scale(1); } }`),
-  createSpinner('pulse-shadow', 'Shadow Pulse', `
+  createPulse('pulse-shadow', 'Shadow Pulse', `
 .loader { width: var(--loader-size); height: var(--loader-size); background: var(--loader-color); border-radius: 50%; animation: shadow-pulse var(--loader-speed) infinite; }
 @keyframes shadow-pulse { 0% { box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.2); } 100% { box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); } }`),
-  createSpinner('pulse-border', 'Border Pulse', `
+  createPulse('pulse-border', 'Border Pulse', `
 .loader { width: var(--loader-size); height: var(--loader-size); border: 4px solid var(--loader-color); border-radius: 50%; animation: border-p var(--loader-speed) infinite ease-in-out; }
 @keyframes border-p { 0% { border-width: 4px; } 50% { border-width: 20px; opacity: 0.5; } 100% { border-width: 4px; } }`),
-  createSpinner('pulse-double', 'Double Pulse', `
+  createPulse('pulse-double', 'Double Pulse', `
 .loader { width: var(--loader-size); height: var(--loader-size); position: relative; }
 .loader div { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: var(--loader-color); opacity: 0.6; animation: double-p var(--loader-speed) infinite ease-in-out; }
 .loader div:nth-child(2) { animation-delay: -1s; }
