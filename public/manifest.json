@@ -1,0 +1,27 @@
+{
+  "name": "Loadify - Premium CSS Loaders",
+  "short_name": "Loadify",
+  "description": "100+ premium CSS loaders and spinners collection with real-time customization",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["developer", "utilities", "productivity"],
+  "lang": "en-US"
+}
+

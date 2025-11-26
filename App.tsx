@@ -90,7 +90,8 @@ const App: React.FC = () => {
         {/* Grid */}
         <div className="flex-1 p-6 md:p-8">
           <div className="max-w-7xl mx-auto">
-             <div className="flex items-center justify-between mb-6">
+             <div className="mb-6">
+                <h1 className="text-2xl font-bold text-white mb-2">Premium CSS Loaders Collection</h1>
                 <h2 className="text-xl font-semibold text-white">
                   {selectedCategory === 'all' ? 'All Loaders' : `${selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)} Loaders`}
                   <span className="ml-2 text-sm font-normal text-slate-500">({filteredLoaders.length})</span>
