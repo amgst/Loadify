@@ -1,0 +1,4 @@
+# ads.txt file for loadify.wbifytools.com
+# Google AdSense Publisher ID
+google.com, pub-3325592373283227, DIRECT, f08c47fec0942fa0
+
