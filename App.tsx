@@ -5,6 +5,9 @@ import Sidebar from './components/Sidebar';
 import LoaderCard from './components/LoaderCard';
 import CodeModal from './components/CodeModal';
 import AIGenerator from './components/AIGenerator';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsOfService from './components/TermsOfService';
+import About from './components/About';
 import { Menu, Wand2, Search } from 'lucide-react';
 
 const App: React.FC = () => {
@@ -22,6 +25,9 @@ const App: React.FC = () => {
   // Modal states
   const [selectedLoader, setSelectedLoader] = useState<LoaderItem | null>(null);
   const [showAIGenerator, setShowAIGenerator] = useState(false);
+  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
+  const [showTermsOfService, setShowTermsOfService] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
 
   const filteredLoaders = loaders.filter(loader => {
     const matchesCategory = selectedCategory === 'all' || loader.type === selectedCategory;
@@ -122,10 +128,46 @@ const App: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <footer className="border-t border-slate-800 py-8 px-6 text-center">
-            <p className="text-slate-500 text-sm">
+        <footer className="border-t border-slate-800 py-8 px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-4">
+              <p className="text-slate-500 text-sm">
                 Built with <span className="text-red-500">♥</span> using React, Tailwind & Gemini API.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
+                <button 
+                  onClick={() => setShowAbout(true)}
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  About
+                </button>
+                <span className="text-slate-600">•</span>
+                <button 
+                  onClick={() => setShowPrivacyPolicy(true)}
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  Privacy Policy
+                </button>
+                <span className="text-slate-600">•</span>
+                <button 
+                  onClick={() => setShowTermsOfService(true)}
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  Terms of Service
+                </button>
+                <span className="text-slate-600">•</span>
+                <a 
+                  href="mailto:contact@wbifytools.com"
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  Contact
+                </a>
+              </div>
+            </div>
+            <p className="text-center text-slate-600 text-xs">
+              © 2024 Loadify. All rights reserved.
             </p>
+          </div>
         </footer>
       </main>
 
@@ -143,6 +185,18 @@ const App: React.FC = () => {
           onClose={() => setShowAIGenerator(false)}
           onGenerate={handleAddNewLoader}
         />
+      )}
+
+      {showPrivacyPolicy && (
+        <PrivacyPolicy onClose={() => setShowPrivacyPolicy(false)} />
+      )}
+
+      {showTermsOfService && (
+        <TermsOfService onClose={() => setShowTermsOfService(false)} />
+      )}
+
+      {showAbout && (
+        <About onClose={() => setShowAbout(false)} />
       )}
       
     </div>
