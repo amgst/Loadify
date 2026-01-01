@@ -31,7 +31,7 @@ const Sidebar: React.FC<SidebarProps> = ({ config, setConfig, selectedCategory, 
           <div className="bg-blue-600 p-2 rounded-lg">
             <RefreshCw className="text-white w-6 h-6 animate-spin-slow" />
           </div>
-          <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">Loadify</h1>
+          <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400" aria-label="Loadify">Loadify</div>
         </div>
 
         <div className="space-y-8">

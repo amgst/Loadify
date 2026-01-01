@@ -94,18 +94,18 @@ const App: React.FC = () => {
         </header>
 
         {/* Grid */}
-        <div className="flex-1 p-6 md:p-8">
+        <section className="flex-1 p-6 md:p-8">
           <div className="max-w-7xl mx-auto">
-             <div className="mb-6">
+             <header className="mb-6">
                 <h1 className="text-2xl font-bold text-white mb-2">Premium CSS Loaders Collection</h1>
                 <h2 className="text-xl font-semibold text-white">
                   {selectedCategory === 'all' ? 'All Loaders' : `${selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)} Loaders`}
                   <span className="ml-2 text-sm font-normal text-slate-500">({filteredLoaders.length})</span>
                 </h2>
-             </div>
+             </header>
 
             {filteredLoaders.length > 0 ? (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6" role="list">
                 {filteredLoaders.map(loader => (
                   <LoaderCard 
                     key={loader.id} 
@@ -116,8 +116,8 @@ const App: React.FC = () => {
                 ))}
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center py-20 text-slate-500">
-                <div className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center mb-4">
+              <div className="flex flex-col items-center justify-center py-20 text-slate-500" role="status" aria-live="polite">
+                <div className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center mb-4" aria-hidden="true">
                   <Search className="w-8 h-8 opacity-50" />
                 </div>
                 <p className="text-lg font-medium">No loaders found</p>
@@ -125,7 +125,7 @@ const App: React.FC = () => {
               </div>
             )}
           </div>
-        </div>
+        </section>
 
         {/* Footer */}
         <footer className="border-t border-slate-800 py-8 px-6">

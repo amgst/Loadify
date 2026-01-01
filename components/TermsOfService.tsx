@@ -102,3 +102,5 @@ const TermsOfService: React.FC<TermsOfServiceProps> = ({ onClose }) => {
 
 export default TermsOfService;
 
+
+

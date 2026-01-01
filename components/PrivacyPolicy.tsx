@@ -114,3 +114,5 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onClose }) => {
 
 export default PrivacyPolicy;
 
+
+
